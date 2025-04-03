@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function PostForm({ onCreatePost }) {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('');
-  const [sources, setSources] = useState('');
+  const [formData, setFormData] = useState({
+    title: '',
+    content: '',
+    author: '',
+    sources: ''
+  });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
@@ -13,16 +15,13 @@ function PostForm({ onCreatePost }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!title.trim() || !content.trim()) {
+    if (!formData.title.trim() || !formData.content.trim()) {
       setError('Title and Content are required');
       return;
     }
 
     const newPost = { 
-      title,
-      content,
-      author,
-      sources,
+      ...formData,
       date: new Date().toISOString()
     };
 
@@ -40,7 +39,6 @@ function PostForm({ onCreatePost }) {
 
       const createdPost = await response.json();
       
-      // Either use callback or redirect
       if (onCreatePost) {
         onCreatePost(createdPost);
       } else {
@@ -48,10 +46,12 @@ function PostForm({ onCreatePost }) {
       }
 
       // Reset form
-      setTitle('');
-      setContent('');
-      setAuthor('');
-      setSources('');
+      setFormData({
+        title: '',
+        content: '',
+        author: '',
+        sources: ''
+      });
       
       setSuccess(true);
       setError('');
@@ -63,62 +63,79 @@ function PostForm({ onCreatePost }) {
     }
   };
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
   return (
     <div className="form-container">
       <h2>Create New Post</h2>
-      {success && <div className="success">Post created successfully!</div>}
-      {error && <div className="error">Error: {error}</div>}
+      {success && <div className="success-message">Post created successfully!</div>}
+      {error && <div className="error-message">Error: {error}</div>}
       
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="title">
-            Title <span style={{ color: 'red' }}>*</span>
+          <label>
+            Title <span className="required">*</span>
           </label>
           <input
-            id="title"
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="content">
-            Content <span style={{ color: 'red' }}>*</span>
+          <label>
+            Content <span className="required">*</span>
           </label>
           <textarea
-            id="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
+            name="content"
+            value={formData.content}
+            onChange={handleChange}
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="author">Author</label>
+          <label>Author</label>
           <input
-            id="author"
             type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            name="author"
+            value={formData.author}
+            onChange={handleChange}
           />
         </div>
 
         <div className="form-group">
-  <label>Source URL:</label>
-  <input
-    type="url"
-    value={formData.sources}
-    onChange={(e) => setFormData({...formData, sources: e.target.value})}
-    placeholder="https://example.com"
-    required
-  />
-</div>
+          <label>Source URL <span className="optional">(optional)</span></label>
+          <input
+            type="url"
+            name="sources"
+            value={formData.sources}
+            onChange={handleChange}
+            placeholder="https://example.com"
+            pattern="https?://.*"
+          />
+        </div>
 
-        <button type="submit" className="submit-button">
-          Create Post
-        </button>
+        <div className="form-actions">
+          <button type="submit" className="submit-button">
+            Create Post
+          </button>
+          <button 
+            type="button" 
+            className="cancel-button"
+            onClick={() => navigate('/')}
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
