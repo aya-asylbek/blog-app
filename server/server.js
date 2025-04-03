@@ -52,47 +52,47 @@ app.get('/posts/:id', async (req, res) => {
     const { id } = req.params;
     
     try {
-      //using LEFT JOIN
-      const result = await db.any(
-        `SELECT posts.*, comments.*
-         FROM posts
-         LEFT JOIN comments ON posts.id = comments.post_id
-         WHERE posts.id = $1`,
-        [id]
-      );
+        //using LEFT JOIN and selecting specific columns post by id and comment by post id
+        const result = await db.any(
+            `SELECT posts.id as post_id, posts.title, posts.author, posts.date, posts.content, posts.image, posts.sources,
+                    comments.id as comment_id, comments.author as comment_author, comments.content as comment_content, comments.date as comment_date
+             FROM posts
+             LEFT JOIN comments ON posts.id = comments.post_id
+             WHERE posts.id = $1`,
+            [id]
+        );
   
-      if (result.length === 0) {
-        return res.status(404).json({ error: 'Post not found' });
-      }
+        if (result.length === 0) {
+            return res.status(404).json({ error: 'Post not found' });
+        }
   
-      const post = {
-        ...result[0],  // Take the first post data by index
-        comments: result.filter(row => row.comment_id !== null)  // Filter out the comments
-      };
+        const post = {
+            id: result[0].post_id,
+            title: result[0].title,
+            author: result[0].author,
+            date: result[0].date,
+            content: result[0].content,
+            image: result[0].image,
+            sources: result[0].sources,
+            comments: result.map(row => {
+                return {
+                    id: row.comment_id,
+                    author: row.comment_author,
+                    content: row.comment_content,
+                    date: row.comment_date
+                };
+            })
+        };
   
-      // If no comments ( returns an empty array[])
-      if (post.comments.length === 0) {
-        post.comments = [];  //empty array []
-      }
-  
-      // Respond with the post and comments
-      res.status(200).json(post);
+        // Respond with the post and comments
+        res.status(200).json(post);
     } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: 'Failed to fetch post with comments' });
-    }
-  });
-
-// 🔍 get a single post by ID (without comments)
-app.get("/posts/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const post = await db.one("SELECT * FROM posts WHERE id = $1", [id]);
-        res.json(post);
-    } catch (err) {
-        res.status(404).json({ error: "Post not found" });
+        console.error(err);
+        res.status(500).json({ error: 'Failed to fetch post with comments' });
     }
 });
+
+
 
 // 🔍 update a post by ID
 app.put("/posts/:id", async (req, res) => {
