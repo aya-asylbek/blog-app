@@ -106,14 +106,15 @@ function PostForm({ onCreatePost }) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="sources">Source URL</label>
-          <input
-            id="sources"
-            type="url"
-            value={sources}
-            onChange={(e) => setSources(e.target.value)}
-          />
-        </div>
+  <label>Source URL:</label>
+  <input
+    type="url"
+    value={formData.sources}
+    onChange={(e) => setFormData({...formData, sources: e.target.value})}
+    placeholder="https://example.com"
+    required
+  />
+</div>
 
         <button type="submit" className="submit-button">
           Create Post

@@ -170,3 +170,17 @@ body {
   padding: 10px;
   margin: 20px;
 }
+
+.source-link {
+  color: #007bff;
+  text-decoration: none;
+  word-break: break-all;
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source-link:hover {
+  text-decoration: underline;
+}

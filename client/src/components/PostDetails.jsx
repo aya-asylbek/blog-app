@@ -40,7 +40,19 @@ function PostDetails() {
         <h1>{post.title}</h1>
         <p className="author"><strong>Author:</strong> {post.author}</p>
         <p className="content">{post.content}</p>
-        <p className="source"><strong>Source:</strong> <a href={post.sources} target="_blank" rel="noopener noreferrer">Wikipedia - Lake Issyk-Kul</a></p>
+        {post.sources && (
+          <p className="source">
+            <strong>Source:</strong>{' '}
+            <a 
+              href={post.sources} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="source-link"
+            >
+              {post.sources}
+            </a>
+          </p>
+        )}
         <p className="date"><strong>Published on:</strong> {new Date(post.date).toLocaleDateString()}</p>
 
         <h3>Comments:</h3>
