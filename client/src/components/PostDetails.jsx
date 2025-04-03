@@ -49,7 +49,7 @@ function PostDetails() {
             <div key={index} className="comment-card">
               <h4 className="comment-author">{comment.author}</h4>
               <p className="comment-content">{comment.content}</p>
-              <p className="comment-date"><em>Posted on: {new Date(comment.date).toLocaleDateString()}</em></p>
+              {/* <p className="comment-date"><em>Posted on: {new Date(comment.date).toLocaleDateString()}</em></p> */}
             </div>
           ))
         ) : (
