@@ -72,14 +72,14 @@ cd ../server && npm install
 🗄 Database Setup
 s
 -- Create database
-CREATE DATABASE travel_blog;
+CREATE DATABASE blog_app;
 
 -- Create user
 CREATE USER tpl522_13 WITH PASSWORD 'your_password';
-GRANT ALL PRIVILEGES ON DATABASE travel_blog TO tpl522_13;
+GRANT ALL PRIVILEGES ON DATABASE blog_app TO tpl522_13;
 
 -- Load schema
-psql -U tpl522_13 -d travel_blog -a -f database_dump.sql
+psql -U tpl522_13 -d blog_app -a -f database_dump.sql
 ⚙ Configuration
 
 Create .env in /server:
@@ -90,7 +90,7 @@ PG_USER=tpl522_13
 PG_PASSWORD=your_password
 PG_HOST=localhost
 PG_PORT=5432
-PG_DATABASE=travel_blog
+PG_DATABASE=blog_app
 PORT=5000
 
 🚦 Running the Application
@@ -160,3 +160,4 @@ Frontend: 5173 🖥️
 3 example posts 📑
 
 Demo comments 💬
+
