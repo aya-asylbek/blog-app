@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #F4F4F4;
+  background-color: #3abeb8;
 }
 .post-container {
   padding: 20px;
@@ -10,8 +10,8 @@ body {
   margin: auto;
 }
 .post-card {
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #3f0b0b;
+  border: 1px solid #dac2c2;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
@@ -73,7 +73,7 @@ body {
   padding: 20px;
 }
 .post-card {
-  background: #fff;
+  background: #d0e4d7;
   border-radius: 8px;
   padding: 20px;
   margin-bottom: 20px;
