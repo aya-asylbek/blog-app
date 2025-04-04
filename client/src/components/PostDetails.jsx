@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';//to add navigation to use button to go back to home page
 
 const fetchPost = async (id) => {
   const response = await fetch(`http://localhost:5000/posts/${id}`);
@@ -13,6 +14,7 @@ function PostDetails() {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate =useNavigate();// adding hook to navigation
 
   useEffect(() => {
     const getPostData = async () => {
@@ -36,6 +38,12 @@ function PostDetails() {
 
   return (
     <div className="post-container">
+       <button 
+        onClick={() => navigate('/')}
+        className="back-button"
+      >
+        ← Back to Home
+      </button>
       <div className="post-card">
         <h1>{post.title}</h1>
         <p className="author"><strong>Author:</strong> {post.author}</p>
