@@ -306,3 +306,19 @@ body {
   color: #616161;
 }
 /* ---------------------------------≥≥≥≥≥ */
+/* Remove list bullets and default padding */
+.posts-ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* Style for individual post cards */
+.post-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 1rem 0;
+  padding: 1.5rem;
+}

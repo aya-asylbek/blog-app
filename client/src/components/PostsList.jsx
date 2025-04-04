@@ -57,7 +57,7 @@ function PostsList() {
       {posts.length === 0 ? (
         <p>No posts available</p>
       ) : (
-        <ul>
+        <ul className="posts-ul"> 
           {posts.map(post => (
              <li key={post.id} className="post-card">
              <div className="post-header">
