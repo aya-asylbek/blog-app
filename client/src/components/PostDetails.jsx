@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';//to add navigation to use button to go back to home page
+import { useParams, useNavigate } from 'react-router-dom';
+import SentimentIndicator from "./SentimentIndicator"; 
 
 const fetchPost = async (id) => {
   const response = await fetch(`http://localhost:5000/posts/${id}`);
@@ -14,7 +14,7 @@ function PostDetails() {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate =useNavigate();// adding hook to navigation
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getPostData = async () => {
@@ -38,7 +38,7 @@ function PostDetails() {
 
   return (
     <div className="post-container">
-       <button 
+      <button 
         onClick={() => navigate('/')}
         className="back-button"
       >
@@ -46,6 +46,8 @@ function PostDetails() {
       </button>
       <div className="post-card">
         <h1>{post.title}</h1>
+        {/* Add SentimentIndicator HERE */}
+        <SentimentIndicator content={post.content} />
         <p className="author"><strong>Author:</strong> {post.author}</p>
         <p className="content">{post.content}</p>
         {post.sources && (
@@ -69,7 +71,6 @@ function PostDetails() {
             <div key={index} className="comment-card">
               <h4 className="comment-author">{comment.author}</h4>
               <p className="comment-content">{comment.content}</p>
-              {/* <p className="comment-date"><em>Posted on: {new Date(comment.date).toLocaleDateString()}</em></p> */}
             </div>
           ))
         ) : (
@@ -80,4 +81,4 @@ function PostDetails() {
   );
 }
 
-export default PostDetails;
+export default PostDetails; 
