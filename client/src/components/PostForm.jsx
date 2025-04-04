@@ -14,9 +14,9 @@ function PostForm({ onCreatePost }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    if (!formData.title.trim() || !formData.content.trim()) {
-      setError('Title and Content are required');
+    //required field in form submission 
+    if (!formData.title.trim() || !formData.content.trim() || !formData.author.trim()) {
+      setError('Title, author and content are required!');
       return;
     }
 
@@ -103,7 +103,9 @@ function PostForm({ onCreatePost }) {
         </div>
 
         <div className="form-group">
-          <label>Author</label>
+        <label>
+            Author <span className="required">*</span> 
+          </label>
           <input
             type="text"
             name="author"

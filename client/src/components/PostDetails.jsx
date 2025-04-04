@@ -46,7 +46,7 @@ function PostDetails() {
       </button>
       <div className="post-card">
         <h1>{post.title}</h1>
-        {/* Add SentimentIndicator HERE */}
+        {/* Adding SentimentIndicator HERE */}
         <SentimentIndicator content={post.content} />
         <p className="author"><strong>Author:</strong> {post.author}</p>
         <p className="content">{post.content}</p>
