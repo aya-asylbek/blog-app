@@ -49,7 +49,7 @@ function PostsList() {
 
   return (
     <div className="posts-list">
-      <h1>Blog App</h1>
+      <h1>Travel Blog App</h1>
       <Link to="/posts/new" className="create-post-button">
         ➕ Create New Post
       </Link>

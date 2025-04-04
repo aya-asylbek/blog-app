@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import SentimentIndicator from "./SentimentIndicator"; 
+import SentimentIndicator from "./SentimentIndicator";
 
 const fetchPost = async (id) => {
   const response = await fetch(`http://localhost:5000/posts/${id}`);
@@ -38,7 +38,7 @@ function PostDetails() {
 
   return (
     <div className="post-container">
-      <button 
+      <button
         onClick={() => navigate('/')}
         className="back-button"
       >
@@ -53,9 +53,9 @@ function PostDetails() {
         {post.sources && (
           <p className="source">
             <strong>Source:</strong>{' '}
-            <a 
-              href={post.sources} 
-              target="_blank" 
+            <a
+              href={post.sources}
+              target="_blank"
               rel="noopener noreferrer"
               className="source-link"
             >
