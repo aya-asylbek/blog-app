@@ -2,6 +2,7 @@ import express, { json } from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
 import db from "./db.js";
+import Sentiment from "sentiment";
 
 config();
 
@@ -197,6 +198,26 @@ app.post('/comments', async (req, res) => {
     }
   });
   
+
+// ----------------------------------------------------------------------------------->>>>>>>>>>
+
+
+  // Sentiment analysis endpoint
+app.post("/analyze-sentiment", (req, res) => {
+  try {
+    const { content } = req.body;
+    const analyzer = new Sentiment();
+    const result = analyzer.analyze(content);
+    
+    // Return the score and comparative 
+    res.json({
+      score: result.score,
+      comparative: result.comparative,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Sentiment analysis failed" });
+  }
+});
 
 //🔍 Start my  server
 app.listen(PORT, () => {
