@@ -32,7 +32,30 @@ A full-stack travel blog application built with React, Express.js, and PostgreSQ
 ![CORS](https://img.shields.io/badge/CORS-999999?logo=webpack)
 ![Dotenv](https://img.shields.io/badge/Dotenv-ECD53F?logo=dotenv)
 
+View Post 
+
+https://github.com/user-attachments/assets/0c955edb-b5ec-410c-9c96-94ee65c88316
+
+
+Create new post 
+
+
+https://github.com/user-attachments/assets/32e15cd4-ff04-4651-bf29-53b9dd38efda
+
+Edit post 
+
+
+
+https://github.com/user-attachments/assets/25bd518a-70c1-4968-9be7-b57fa1af77d7
+
+
+Delete post 
+
 ## 🚀 Installation
+
+
+https://github.com/user-attachments/assets/ff5ca777-3c50-463e-91f4-4752c488c30b
+
 
 ```bash
 # Clone repository
