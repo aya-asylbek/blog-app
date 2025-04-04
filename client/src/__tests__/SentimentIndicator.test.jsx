@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import SentimentIndicator from "./SentimentIndicator";
+import SentimentIndicator from "../components/SentimentIndicator.jsx";
 
 test("displays sentiment score after analysis", async () => {
   render(<SentimentIndicator content="This is a happy post!" />);
